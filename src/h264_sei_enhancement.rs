@@ -53,7 +53,7 @@ fn main() -> Result<(), Error> {
 
     let size = input_file.metadata()?.len() as usize;
 
-    let hidden_message = "teststrinfegew geg ewg ewg ewqg qewg ewgqwg";
+    let hidden_message = "test";
     let sei_prefix: [u8; 3] = [6, 5, hidden_message.len() as u8];
     let enhanchment_buf = [&sei_prefix, hidden_message.as_bytes()].concat();
 
