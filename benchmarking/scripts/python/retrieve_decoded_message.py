@@ -26,8 +26,12 @@ def main():
     lines = open(sys.argv[1]).readlines()
     bits = retrieve_bits_from_lines(lines)
 
-    print(f"Injected bits: {len(bits)} ({len(bits)/8} bytes)")
-    print(string_from_bits(bits))
+
+    if "stats" in sys.argv:
+        print(f"Injected bits: {len(bits)} ({len(bits)/8} bytes)")
+
+    if "message" in sys.argv:
+        print(string_from_bits(bits))
 
 if __name__ == "__main__":
     main()
