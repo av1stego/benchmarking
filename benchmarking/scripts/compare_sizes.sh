@@ -1,7 +1,7 @@
 #!/bin/bash
-echo "|-------------------------------------------------------------------------------------------------------------------|"
-printf "| %-24s | %-16s | %-12s | %-16s | %-19s | %-11s |\n" "VIDEO ID" "MESSAGE ID" "MESSAGE SIZE" "NAIVE VIDEO SIZE" "ENRICHED VIDEO SIZE" "ENRICH COST"
-echo "|--------------------------|------------------|--------------|------------------|---------------------|-------------|"
+echo "|--------------------------------------------------------------------------------------------------------------------------|"
+printf "| %-24s | %-16s | %-16s | %-19s | %-19s | %-11s |\n" "VIDEO ID" "MESSAGE ID" "NAIVE VIDEO SIZE" "ENRICHED VIDEO SIZE" "MESSAGE SIZE" "ENRICH COST"
+echo "|--------------------------|------------------|------------------|---------------------|---------------------|-------------|"
 
 for filename in ./videos/dataset/*; do
     videoname=$(basename $filename)
@@ -17,8 +17,8 @@ for filename in ./videos/dataset/*; do
         enriched_size=$(wc -c ./videos/av1-enriched/$case_id.ivf | cut -f 1 -d ' ')
         enrich_cost=$(($enriched_size-$naive_size))
 
-        printf "| %-24s | %-16s | %-12s | %-16s | %-19s | %-11s |\n" $videoid $hidden_msg_id $message_size $naive_size $enriched_size $enrich_cost
+        printf "| %-24s | %-16s | %-16s | %-19s | %-19s | %-11s |\n" $videoid $hidden_msg_id $naive_size $enriched_size $message_size $enrich_cost
     done
 done
 
-echo "|-------------------------------------------------------------------------------------------------------------------|"
+echo "|--------------------------------------------------------------------------------------------------------------------------|"
