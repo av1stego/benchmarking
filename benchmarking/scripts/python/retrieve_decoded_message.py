@@ -1,5 +1,7 @@
 import sys
 
+SKIPPING_IDENTIFIER = "[Skipping]"
+
 def string_from_bits(bits):
     chars = []
     bytes_count = int(len(bits) / 8)
@@ -13,19 +15,29 @@ def string_from_bits(bits):
 
     return ''.join(chars)
 
-def retrieve_bits_from_lines(lines):
+def retrieve_bits_from_lines(lines, padding, offset):
     bits = []
 
-    for line in lines:
-        bit = int(line.split(" ")[7])
-        bits.append(bit)
+    lines = lines[offset:]
+
+    i = 0
+
+    while i < len(lines):
+        line = lines[i]
+        if not (SKIPPING_IDENTIFIER in line):
+            bit = int(line.split(" ")[7])
+            bits.append(bit)
+
+        i += 1 + padding
 
     return bits
 
 def main():
     lines = open(sys.argv[1]).readlines()
-    bits = retrieve_bits_from_lines(lines)
+    padding = int(sys.argv[2])
+    offset = int(sys.argv[3])
 
+    bits = retrieve_bits_from_lines(lines, padding, offset)
 
     if "stats" in sys.argv:
         print(f"Injected bits: {len(bits)} ({len(bits)/8} bytes)")

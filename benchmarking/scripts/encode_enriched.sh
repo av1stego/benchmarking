@@ -12,9 +12,12 @@ for filename in ./videos/raw/*; do
         hidden_message=$(cat ./messages/$videoid/$hidden_msg_id.txt)
         case_id=$(printf "%s_%s" $videoid $hidden_msg_id)
 
+        padding=0
+        offset=0
+
         printf "[Encode enriched] Enqueueing case %s...\n" $case_id
 
-        COMMAND="./bin/rav1e-lcmg -y $filename --speed 6 --threads 1 --output ./videos/av1-enriched/$case_id.ivf --hidden-string \"$hidden_message\" > results/enrich_outputs/$case_id.txt 2> results/full_logs/encode_enriched/$case_id.log"
+        COMMAND="./bin/rav1e-lcmg -y $filename --speed 6 --threads 1 --output ./videos/av1-enriched/$case_id.ivf --hidden-string \"$hidden_message\" --hidden-bits-padding \"$padding\" --hidden-bits-offset \"$offset\" > results/enrich_outputs/$case_id.txt 2> results/full_logs/encode_enriched/$case_id.log"
         echo $COMMAND >> $JOBS_FILE
     done
 done
