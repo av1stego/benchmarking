@@ -1,21 +1,22 @@
-printf "Clearing the workbench...\n"
+BOLD="\e[1m"
+ENDCOLOR="\e[0m"
+
+echo -e "${BOLD}Clearing the workbench...${ENDCOLOR}"
 ./scripts/clear.sh
 
-printf "Converting videos to Y4M...\n"
-./scripts/convert_to_y4m.sh
+echo -e "${BOLD}Converting videos to Y4M...${ENDCOLOR}"
+./scripts/execute_parallel.sh convert_to_y4m
 
-printf "Running encoding jobs...\n"
-./scripts/encode_naive.sh &
-./scripts/encode_enriched.sh &
-wait
+echo -e "${BOLD}Running encoding jobs...${ENDCOLOR}"
+./scripts/execute_parallel.sh encode_naive
+./scripts/execute_parallel.sh encode_enriched
 
-printf "Running decoding jobs...\n"
-./scripts/decode_naive.sh &
-./scripts/decode_enriched.sh &
-wait
+echo -e "${BOLD}Running decoding jobs...${ENDCOLOR}"
+./scripts/execute_parallel.sh decode_naive
+./scripts/execute_parallel.sh decode_enriched
 
-printf "Extracting hidden messages...\n"
-./scripts/extract_enriched_messages.sh
+echo -e "${BOLD}Extracting hidden messages...${ENDCOLOR}"
+./scripts/execute_serial.sh extract_enriched_message
 
-./scripts/verify_integrity.sh && \
-./scripts/compare_sizes.sh
+./scripts/execute_serial.sh verify_integrity && \
+./scripts/execute_serial.sh compare_sizes compare_sizes_header compare_sizes_footer

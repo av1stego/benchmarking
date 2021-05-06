@@ -9,6 +9,7 @@ rm ./results/enrich_outputs/*.txt
 rm ./results/hidden_information_stats/*.txt
 rm ./results/hidden_messages/*.hex
 
+rm ./results/full_logs/convert_to_y4m/*.log
 rm ./results/full_logs/encode_enriched/*.log
 rm ./results/full_logs/encode_naive/*.log
 rm ./results/full_logs/decode_enriched/*.log
