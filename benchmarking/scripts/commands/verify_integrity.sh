@@ -14,9 +14,11 @@ read -d '' written_hidden_message < <(echo $written_hidden_message_hex | xxd -r 
 
 if [[ $original_hidden_message == $written_hidden_message ]]; then
     printf "${BOLD}${GREEN}OK"
+    echo "OK" >> ./results/integrity_verifications/$CASE_ID.txt
     ERROR=0
 else
     printf "${BOLD}${RED}ERROR"
+    echo "ERROR" >> ./results/integrity_verifications/$CASE_ID.txt
     ERROR=1
 fi
 
