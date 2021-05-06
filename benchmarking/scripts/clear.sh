@@ -15,4 +15,6 @@ rm ./results/full_logs/encode_naive/*.log
 rm ./results/full_logs/decode_enriched/*.log
 rm ./results/full_logs/decode_naive/*.log
 
+rm ./results/integrity_verifications/*.txt
+
 rm ./scripts/tmp/*.jobs
