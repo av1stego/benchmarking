@@ -30,4 +30,6 @@ echo -e "${BOLD}Extracting hidden messages...${ENDCOLOR}"
 ./scripts/execute_serial.sh extract_enriched_message
 
 ./scripts/execute_serial.sh verify_integrity
-./scripts/execute_serial.sh compare_sizes compare_sizes_header compare_sizes_footer
+
+./scripts/execute_serial.sh stats_csv stats_csv_header > "results/stats/$(date).csv"
+./scripts/execute_serial.sh stats stats_header stats_footer
