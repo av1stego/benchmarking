@@ -33,3 +33,8 @@ echo -e "${BOLD}Extracting hidden messages...${ENDCOLOR}"
 
 ./scripts/execute_serial.sh stats_csv stats_csv_header > "results/stats/$(date).csv"
 ./scripts/execute_serial.sh stats stats_header stats_footer
+
+echo -e "${BOLD}Calculating PSNR...${ENDCOLOR}"
+./scripts/generate_jobs.sh psnr
+./scripts/commands/psnr_header.sh > "results/psnr/$(date).csv"
+./scripts/execute_parallel.sh psnr >> "results/psnr/$(date).csv"
